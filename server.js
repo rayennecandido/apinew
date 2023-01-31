@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const cors = require("cors");
 
@@ -16,7 +17,9 @@ db.mongoose.connect(db.url, {
 })
 
 var corsOptions = {
-  origin: "http://localhost:8081",
+origin:'*', 
+ credentials:true,            //access-control-allow-credentials:true
+ optionSuccessStatus:200,
 };
 
 app.use(cors(corsOptions));
@@ -33,6 +36,8 @@ app.get("/", (req, res) => {
 });
 
 // set port, listen for requests
+const DB_USER = process.env.DB_USER
+const DB_PASSWORD = encodeURIComponent(process.env.DB_PASSWORD)
 const PORT = process.env.PORT || 8080;
 require("./app/Routes/clienteRoutes")(app);
 app.listen(PORT, () => {

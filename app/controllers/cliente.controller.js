@@ -1,10 +1,10 @@
 const db = require("../models");
-const cliente = db.cliente;
+const Cliente = db.cliente;
 
 exports.create = (req, res) => {
   // {name:"rayenne", CPF: 098.134.114-00, dataNascimento: 25/08/1995}
     
-if(!req.body.name) {
+if(!req.body.nome) {
   res.status(422).send({ error: 'O nome é obrigatório!' })
   return;
 }
@@ -19,11 +19,11 @@ if(!req.body.dataNascimento) {
   return;
 }
 
-const cliente = new cliente ({
-  name: req.body.name,
+  const cliente= new Cliente ({
+  nome: req.body.nome,
   CPF: req.body.CPF,
   dataNascimento: req.body.dataNascimento
-});
+}); 
 cliente
     .save(cliente)
     .then(data => {
